@@ -77,9 +77,12 @@ class HTML5XBlock(StudioEditableXBlockMixin, XBlock):
 
         settings_fields = self.get_editable_fields()
         settings_page = loader.render_template('templates/studio_edit.html', {'fields': settings_fields})
+        modal_content_url = self.runtime.local_resource_url(self, 'public/ms-teams-app/index.html')
+
         context = {
             'self': self,
             'settings_page': settings_page,
+            'modal_content_url': modal_content_url,
         }
 
         frag.content = xblock_loader.render_template('static/html/studio.html', context)
@@ -90,7 +93,8 @@ class HTML5XBlock(StudioEditableXBlockMixin, XBlock):
         js_data = {
             'editor': self.editor,
             'skin_url': self.runtime.local_resource_url(self, 'public/skin'),
-            'external_plugins': self.get_editor_plugins()
+            'external_plugins': self.get_editor_plugins(),
+            'images_url': self.runtime.local_resource_url(self, 'public/images'),
         }
         frag.initialize_js('HTML5XBlock', js_data)
 
@@ -154,6 +158,8 @@ class HTML5XBlock(StudioEditableXBlockMixin, XBlock):
         frag.add_javascript(self.resource_string('static/js/tinymce/tinymce.min.js'))
         frag.add_javascript(self.resource_string('static/js/tinymce/themes/modern/theme.min.js'))
         frag.add_javascript(self.resource_string('static/js/html.js'))
+        frag.add_javascript(self.resource_string('static/js/micromodal.min.js'))
+        frag.add_javascript(self.resource_string('static/js/modal.min.js'))
         frag.add_javascript(loader.load_unicode('public/studio_edit.js'))
 
         if self.editor == 'raw':

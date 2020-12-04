@@ -28,6 +28,9 @@ function configureTheEditor(data) {
   const languageWrapper = document.querySelectorAll(".wrapper-view, .window-wrap");
   const directionality = (languageWrapper.length > 0) ? languageWrapper.dir : "ltr";
   var editor;
+  const myModal = new Modal({
+    el: document.getElementById('teams-static-modal')
+  });
 
   if (data.editor === "visual") {
     tinymce.remove(contentSelector);
@@ -45,7 +48,7 @@ function configureTheEditor(data) {
       valid_children: "+body[style]",
       invalid_elements: "",
       font_formats: FONTS,
-      toolbar: "formatselect | fontselect | bold italic underline forecolor codesample | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent blockquote | link unlink image | code",
+      toolbar: "formatselect | fontselect | bold italic underline forecolor codesample | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent blockquote | link unlink image | code | addMSTeams",
       external_plugins: data.external_plugins,
       formats: {
         code: {
@@ -65,6 +68,15 @@ function configureTheEditor(data) {
         config: {
           mode: 'text/html',
         }
+      },
+      setup: function(ed) {
+        ed.addButton('addMSTeams', {
+          title: 'Add MS Teams Meeting',
+          icon: 'icon gavickpro-own-icon',
+          onclick: function() {
+             myModal.show();
+          }
+        });
       }
     });
   } else {
