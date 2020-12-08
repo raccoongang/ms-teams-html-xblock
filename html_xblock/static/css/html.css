@@ -43,10 +43,6 @@
     display: none;
 }
 
-i.gavickpro-own-icon {
-    background-image: url('/xblock/resource/html5/public/images/icons8-microsoft-teams.svg');
-}
-
 #teams-static-modal .modal-content {
   min-height: 600px;
   -webkit-border-radius: 6px;
