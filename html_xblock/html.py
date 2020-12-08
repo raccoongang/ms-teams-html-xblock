@@ -26,7 +26,7 @@ class HTML5XBlock(StudioEditableXBlockMixin, XBlock):
         display_name=_('Display Name'),
         help=_('The display name for this component.'),
         scope=Scope.settings,
-        default=_('Text')
+        default=_('MS Teams')
     )
     data = String(help=_('Html contents to display for this module'), default=u'', scope=Scope.content)
     allow_javascript = Boolean(
