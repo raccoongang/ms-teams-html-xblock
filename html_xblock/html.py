@@ -48,7 +48,7 @@ class HTML5XBlock(StudioEditableXBlockMixin, XBlock):
         ],
         scope=Scope.settings
     )
-    editable_fields = ('display_name', 'editor', 'allow_javascript')
+    editable_fields = ('display_name', 'editor')
 
     @staticmethod
     def resource_string(path):
