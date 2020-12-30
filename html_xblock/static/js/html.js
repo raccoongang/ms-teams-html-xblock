@@ -32,6 +32,17 @@ function configureTheEditor(data) {
     el: document.getElementById('teams-static-modal')
   });
 
+  myModal.on('dismiss', function(modal, event) {
+    if (event.target.classList.contains('btn-confirm')) {
+      const iframe = document.getElementById("teams-iframe"),
+        finalMeetingMessage = iframe.contentWindow.document.getElementsByClassName("meetingCardBody")[0];
+
+      if (finalMeetingMessage) {
+        tinymce.get("html5-textarea").insertContent('<div class="meetingCardBody">' + finalMeetingMessage.innerHTML + '</div>');
+      }
+    }
+  });
+
   if (data.editor === "visual") {
     tinymce.remove(contentSelector);
     editor = tinymce.init({
